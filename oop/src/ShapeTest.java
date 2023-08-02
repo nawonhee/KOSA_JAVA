@@ -1,14 +1,20 @@
-class Shape{ //컴파일시 class Shape extends Object{로 바뀜
+abstract class Shape{ //컴파일시 class Shape extends Object{로 바뀜
 	//private double area;
 	protected double area;
 	double getArea() {
 		return area;
 	}
-	void makeArea() {
-		
-	}
+	//void makeArea(){}
+	abstract void makeArea();
+	
 	public String toString() {
 		return "도형의 면적은 " + area+"입니다";
+	}
+}
+
+class Triangle extends Shape{
+	void makeArea() {
+		
 	}
 }
 

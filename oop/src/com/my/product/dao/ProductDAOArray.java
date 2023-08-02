@@ -1,7 +1,8 @@
 package com.my.product.dao;
+import com.my.exception.AddException;
 import com.my.product.dto.Product;
 
-public class ProductDAO {
+public class ProductDAOArray implements ProductDAOInterface{
 	private Product[] products = new Product[5];
 	int productslength = products.length;
 	private int totalCnt;
@@ -9,12 +10,28 @@ public class ProductDAO {
 	 * 상품을 저장소에 저장한다. 저장소가 꽉찬경우 "저장소가 꽉찼습니다"메시지가 출력된다
 	 * @param product 상품
 	 */
-	public void insert(Product product) {
+	public void insert(Product product) throws AddException{
+		/*
 		if(totalCnt==productslength) 
 			System.out.println("저장소가 꽉찼습니다");
 		else {
 			products[totalCnt] = product;
 			totalCnt++;
+		}
+		*/
+		for(int i=0;i<totalCnt;i++) {
+			products[i].getProdNo().equals(product.getProdNo());{
+				//System.out.println("이미 존재하는 상품입니다");
+				//return;
+				throw new AddException("이미 존재하는 상품입니다");
+			}
+		}
+		try {
+			products[totalCnt] = product;
+			totalCnt++; 
+		}catch(ArrayIndexOutOfBoundsException e) {
+			throw new AddException("저장소가 꽉찼습니다. 저장된 상품수:"+totalCnt); //강제 예외 발생
+			//System.out.println("저장소가 꽉찼습니다. 저장된 상품수:"+totalCnt);
 		}
 	}
 	/**

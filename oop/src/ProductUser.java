@@ -1,11 +1,17 @@
 import java.util.Scanner;
 
-import com.my.product.dao.ProductDAO;
+import com.my.exception.AddException;
+import com.my.product.dao.ProductDAOArray;
+import com.my.product.dao.ProductDAOInterface;
+import com.my.product.dao.ProductDAOList;
 import com.my.product.dto.Product;
 
 public class ProductUser {
 	Scanner sc = new Scanner(System.in);
-	ProductDAO dao = new ProductDAO();
+	
+	ProductDAOInterface dao = new ProductDAOArray();
+	//ProductDAOArray dao = new ProductDAOArray();
+	//ProductDAOInterface dao = new ProductDAOList();
 	
 	void findAll(){
 		System.out.println(">>상품 전체목록<<");
@@ -44,7 +50,13 @@ public class ProductUser {
 		String prodPrice = sc.nextLine();
 		
 		Product p = new Product(prodNo, prodName, Integer.parseInt(prodPrice)); 
-		dao.insert(p);
+		
+		try{
+			dao.insert(p);
+		} catch(AddException e) {
+			e.printStackTrace();
+			System.out.println(e.getMessage());
+		}
 	}
 	
 	public static void main(String[] args) {
