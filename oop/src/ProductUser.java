@@ -1,6 +1,9 @@
 import java.util.Scanner;
 
 import com.my.exception.AddException;
+import com.my.exception.FindException;
+import com.my.exception.ModifyException;
+import com.my.exception.RemoveException;
 import com.my.product.dao.ProductDAOArray;
 import com.my.product.dao.ProductDAOInterface;
 import com.my.product.dao.ProductDAOList;
@@ -13,7 +16,7 @@ public class ProductUser {
 	//ProductDAOArray dao = new ProductDAOArray();
 	//ProductDAOInterface dao = new ProductDAOList();
 	
-	void findAll(){
+	void findAll() throws FindException{
 		System.out.println(">>상품 전체목록<<");
 		Product[] all1 = dao.selectAll();
 		if(all1 == null) {
@@ -25,7 +28,7 @@ public class ProductUser {
 		}
 		System.out.println("----------------");
 	}
-	void findByProdNo(){
+	void findByProdNo() throws FindException{
 		System.out.println(">>상품 번호로 검색<<");
 		System.out.print("상품번호를 입력하세요: ");
 		String prodNo = sc.nextLine();
@@ -59,7 +62,24 @@ public class ProductUser {
 		}
 	}
 	
-	public static void main(String[] args) {
+	void modify() throws ModifyException, FindException{
+		System.out.println("변경할 상품의 번호를 입력하세요: ");
+		String prodNo = sc.nextLine();
+		System.out.println("변경할 상품명: ");
+		String prodName = sc.nextLine();
+		System.out.println("변경할 가격: ");
+		int prodPrice = sc.nextInt();
+		
+		Product p = new Product(prodNo, prodName, prodPrice);
+	}
+	
+	void delete() throws RemoveException, FindException {
+		System.out.println("삭제할 상품의 번호를 입력하세요: ");
+		String prodNo = sc.nextLine();
+		
+	}
+	
+	public static void main(String[] args) throws FindException {
 		ProductUser user = new ProductUser();
 		
 		while(true){
@@ -114,5 +134,6 @@ public class ProductUser {
 			System.out.println(p.prodNo +"번호 상품의 상품명:" + p.prodName + ", 가격:" + p.prodPrice);
 		}	
 		*/	
+	
 	}
 }
