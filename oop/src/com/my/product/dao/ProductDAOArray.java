@@ -77,18 +77,22 @@ public class ProductDAOArray implements ProductDAOInterface{
 	 * @throws ModifyException 변경할 상품이 없으면 예외발생한다
 	 */
 	public void update(Product p) throws ModifyException{
-		Product[] p = new Product[totalCnt];
-		for(int i=0;i<totalCnt;i++) {
-			if(totalCnt==0) {
-				throw new ModifyException("변경할 상품이 없습니다");
-			}else {
-				if(p.getProdName()!=null) {
-					p.setProdName(p.getProdName());
-				}
-				if(p.getProdPrice()!=0) {
-					p.setProdPrice(p.getProdPrice());
-				}
+		int index=0;
+		if(totalCnt==0) {
+			throw new ModifyException("변경할 상품이 없습니다");
+		}
+		
+		for(int i=0;i<productslength;i++) {
+			if(products[i].getProdNo().equals(p.getProdNo())) {
+				index=i;
+				break;
 			}
+		}
+		if(p.getProdName()!=null) {
+			products[index].setProdName(p.getProdName());
+		}
+		if(p.getProdPrice()!=0) {
+			products[index].setProdPrice(p.getProdPrice());
 		}
 	}
 	
@@ -98,6 +102,25 @@ public class ProductDAOArray implements ProductDAOInterface{
 	 * @throws RemoveException 삭제할 상품이 없으면 예외발생한다
 	 */
 	public void delete(String prodNo) throws RemoveException{
+		totalCnt--;
+
+		int index=0;
+		if(totalCnt==0) {
+			throw new RemoveException("삭제할 상품이 없습니다");
+		}
+		
+		for(int i=0;i<productslength;i++) {
+			if(products[i].getProdNo().equals(p.getProdNo())) {
+				index=i;
+				break;
+			}
+		}
+		
+		for(int i=0;i<totalCnt;i++) {
+			if(i==index) {
+				products[i]=products[i+1];
+			}
+		}
 		
 	}
 }
