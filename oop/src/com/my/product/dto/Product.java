@@ -1,5 +1,7 @@
 package com.my.product.dto;
 
+import java.util.Objects;
+
 public class Product {
 	private String prodNo;
 	private String prodName;
@@ -17,6 +19,7 @@ public class Product {
 		this.prodName = prodName;
 		this.prodPrice = prodPrice;
 	}
+	
 	public void setProdNo(String prodNo) {
 		if(prodNo.length()!=5) {
 			System.out.println("상품번호는 5자리이어야 합니다");
@@ -44,4 +47,50 @@ public class Product {
 	public int getProdPrice() {
 		return prodPrice;
 	}
+	/*
+	public boolean equals(Product p) {
+		return (this.prodNo).equals(p.prodNo);
+	}
+	
+	public boolean equals(String no) {
+		return (this.prodNo).equals(no);
+	}
+	*/
+	
+	@Override
+	public int hashCode() {
+		return Objects.hash(prodNo);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		//if (getClass() != obj.getClass())
+		//	return false;
+		Class currentClass = this.getClass();
+		Class paramClass = obj.getClass();
+		if(currentClass != paramClass) {
+			return false;
+		}
+		Product other = (Product) obj;
+		return Objects.equals(prodNo, other.prodNo);
+	}
+	
+	/* 이렇게 해도 된다
+	 @Override
+	 public boolean equals(Object obj){
+	 	if(obj==null){
+	 		return false;
+	 	}
+	 	if(obj instanceof Product){
+	 		Product product = (Product)obj;
+	 		if(this.prodNo.equals(product.prodNo)){
+	 			return true;
+	 		}
+	 	}
+	 	return false;
+	 }
+	*/
 }

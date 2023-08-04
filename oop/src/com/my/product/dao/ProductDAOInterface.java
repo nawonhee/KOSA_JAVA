@@ -25,7 +25,7 @@ public interface ProductDAOInterface { //객체 생성의 용도 x
 	 * @return 상품들. 저장소에 저장된 상품이 한개도 없으면 null을 반환한다
 	 * @throws FindException 저장소에 저장된 상품이 한개도 없으면 예외발생한다
 	 */
-	Product[] selectAll() throws FindException;
+	Object selectAll() throws FindException;
 	
 	/**
 	 * 변경할 상품의 상품번호와 같은 상품을 저장소에서 찾아낸다
