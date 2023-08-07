@@ -13,10 +13,10 @@ import com.my.product.dto.Product;
 public class CollectionTest {
 	public static void test(Collection c) {
 		c.add("one");
-		c.add(Integer.valueOf(2));
-		c.add(Float.valueOf(3.0F));
+		c.add(Integer.valueOf(2)); //boxing, c.add(2);
+		c.add(Float.valueOf(3.0F)); //       c.add(3.0F);
 		c.add("one");
-		c.add(Boolean.valueOf(false));
+		c.add(Boolean.valueOf(false)); //    c.add(false);
 		c.add(new Product("C0001", "아메리카노", 1000));
 		c.add(new Product("C0001", "라테", 2000));
 		
