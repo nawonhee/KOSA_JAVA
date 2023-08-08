@@ -18,7 +18,7 @@ public class ProductUser {
 	//ProductDAOInterface dao = new ProductDAOArray();
 	//ProductDAOArray dao = new ProductDAOArray();
 	//ProductDAOInterface dao = new ProductDAOList();
-	ProductDAOInterface dao;
+	ProductDAOInterface dao; //의존성 주입 , 외부로부터 결정되기 때문
 	ProductUser() {
 		//dao = new ProductDAOList();
 		Properties env = new Properties();
@@ -27,7 +27,7 @@ public class ProductUser {
 			String className = env.getProperty("product.dao"); //product.dao가 키값, 해당하는 value를 가져와라
 			Class clazz = Class.forName(className); //clazz에 저장해라
 			//clazz.newInstance();
-			clazz.getDeclaredConstructor().newInstance();
+			clazz.getDeclaredConstructor().newInstance(); //매개변수없는 생성자 이용
 			Object obj = clazz.getDeclaredConstructor().newInstance();
 			dao = (ProductDAOInterface)obj;
 			System.out.println(dao.getClass().getName());

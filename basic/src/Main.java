@@ -1,25 +1,23 @@
-import java.io.*;
-import java.util.StringTokenizer;
+import java.util.Scanner;
 
 public class Main{
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringTokenizer st = new StringTokenizer("");
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int T, R;
+		String S, new_S;
 		
-		int sum=0;
-		int N = Integer.parseInt(br.readLine());
-		String s = br.readLine();
+		T = sc.nextInt();
 		
-		br.close();
-		
-		for(int i=0;i<N;i++) {
-			sum += (int)s.charAt(i)-48;
+		for(int i=0;i<T;i++) {
+			R = sc.nextInt();
+			S = sc.next();
+			int slength = S.length();
+			for(int j=0;j<slength;j++) {
+				for(int t=0;t<R;t++) {
+					System.out.print(S.charAt(j));
+				}
+			}
+			System.out.println("");
 		}
-		
-		bw.write(String.valueOf(sum));
-
-		bw.close();
 	}
 }
-

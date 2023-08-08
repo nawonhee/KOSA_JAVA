@@ -93,4 +93,8 @@ public class Product {
 	 	return false;
 	 }
 	*/
+	
+	public String toString() {
+		return prodNo+":"+prodName+":"+prodPrice+"\n";
+	}
 }

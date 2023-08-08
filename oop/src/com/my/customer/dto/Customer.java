@@ -1,8 +1,10 @@
 package com.my.customer.dto;
 
+import java.io.Serializable;
+
 public class Customer extends Person {
 	private String id;
-	private String pwd;
+	transient private String pwd; 
 	
 	public Customer() {
 		super();
