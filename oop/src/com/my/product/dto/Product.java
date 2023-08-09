@@ -6,6 +6,7 @@ public class Product {
 	private String prodNo;
 	private String prodName;
 	private int prodPrice;
+	//private Integer prodPrice;
 	
 	public Product(){}  //얘 없으면 디폴트 생성자 안 만들어짐
 	public Product(String prodNo, String prodName){

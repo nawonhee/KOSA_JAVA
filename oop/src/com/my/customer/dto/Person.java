@@ -3,6 +3,10 @@ package com.my.customer.dto;
 import java.io.Serializable;
 
 public class Person  implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	protected String name;
 	protected String address;
 	
