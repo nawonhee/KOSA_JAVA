@@ -9,13 +9,22 @@ public class Main{
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+		StringBuffer sb = new StringBuffer(br.readLine());
 		
-		StringTokenizer st = new StringTokenizer(br.readLine());
-		StringBuilder sb = new StringBuilder(st.nextToken());
+		int A = Integer.parseInt(sb.reverse().toString());
+		int B = Integer.parseInt(sb.reverse().toString());
+		int max = 0;
 		
-		int A = Integer.parseInt(sb.reverse());
-		int B = Integer.parseInt(br.readLine());
+		if(A<B) {
+			max = B;
+		}
+		else if(B<A) {
+			max = A;
+		}
 		
+		bw.write(String.valueOf(max));
 		
+		br.close();
+		bw.close();
 	}
 }
