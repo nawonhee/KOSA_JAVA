@@ -29,7 +29,8 @@ class ClientThread extends Thread {
 			while(true) {
 				String receiveMsg;
 				receiveMsg = dis.readUTF();
-				System.out.println("서버가 되돌려준 메시지:" + receiveMsg);
+				//System.out.println("서버가 되돌려준 메시지:" + receiveMsg);
+				System.out.println(receiveMsg);
 			}
 		}catch(SocketException e) {
 		}catch(EOFException e) {
@@ -62,7 +63,6 @@ public class ClientMultiThread {
 			
 			String sendMsg;
 			do {
-				System.out.print("서버로 보낼 메시지(종료하려면 quit을 입력하세요.): ");
 				sendMsg = sc.nextLine();
 				dos.writeUTF(sendMsg);
 				

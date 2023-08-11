@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class ClientTest {
 	public static void main(String[] args) {
 		Socket s = null;
-		String serverIP = "192.168.1.13";//"192.168.260.260.1";//"127.0.0.1"; //인터넷이 연결되어 있지 않아도 사용한 가능한 ip (localhost)
+		String serverIP = "127.0.0.1";//"192.168.260.260.1";//"127.0.0.1"; //인터넷이 연결되어 있지 않아도 사용한 가능한 ip (localhost)
 		int serverPort = 5432;
 		OutputStream oos = null;
 		DataOutputStream dos = null;

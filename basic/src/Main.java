@@ -1,30 +1,34 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
-import java.util.StringTokenizer;
 
-public class Main{
-	public static void main(String[] args) throws IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-		StringBuffer sb = new StringBuffer(br.readLine());
+
+interface Weapon{
+	void attack();
+}
+
+class Bow implements Weapon{
+	public void attack() {
+		System.out.println("활로 공격한다");
+	}
+}
+class Sword implements Weapon{
+	public void attack() {
+		System.out.println("칼로 공격한다");
+	}
+}
+
+class Character{
+	Weapon weapon;
+	
+	void setWeapon(Weapon weapon) {
+		this.weapon = weapon;
+	}
+}
+
+class Main{
+	public static void main(String[] args) {
+		Character c = new Character();
 		
-		int A = Integer.parseInt(sb.reverse().toString());
-		int B = Integer.parseInt(sb.reverse().toString());
-		int max = 0;
-		
-		if(A<B) {
-			max = B;
-		}
-		else if(B<A) {
-			max = A;
-		}
-		
-		bw.write(String.valueOf(max));
-		
-		br.close();
-		bw.close();
+		Weapon weapon = new Sword();
+		c.setWeapon(weapon);
+		weapon.attack();
 	}
 }
