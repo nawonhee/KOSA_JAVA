@@ -1,0 +1,68 @@
+
+<style>
+    div{
+        padding:10px;
+    }
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script>
+    
+    $(()=>{
+        const savedId = localStorage.getItem('savedId')
+        if(savedId != null){
+            $('div>label>input[name=id]').val(savedId)
+        }
+        $('form').submit((e)=>{
+            if($('div>input[type=checkbox]').prop('checked')){
+                localStorage.setItem('savedId',$('div>label>input[name=id]').val())
+            }else{
+                localStorage.removeItem('savedId')
+            }
+            
+            const idValue = $('div>label>input[name=id]').val()
+            const pwdValue = $('div>label>input[name=pwd]').val()
+            const data = `id=${idValue}&pwd=${pwdValue}`
+
+            $.ajax({
+                url: 'http://localhost:8888/back/login',
+                method: 'POST',
+                success: (responseText)=>{
+                    alert(responseText)
+                },
+                error:(jqXHR, textStatus)=>{
+                    alert(jqXHR.readyState+":"+jqXHR.status+":"+jqXHR.statusText)
+                    console.log(jqXHR)
+                }
+            })
+            e.preventDefault()
+
+        })
+    })
+
+</script>
+
+
+<!-- <form method="post"
+     action="http://localhost:8888/back/login"> -->
+<form>
+    <div>
+        <label>아이디 : <input type="text"
+                                required
+                                placeholder="아이디를 입력하세요" 
+                                id="i"
+                                name="id"></label>
+    </div>
+    <div>
+        <label>비밀번호 : <input type="password" 
+                                required
+                                placeholder="비밀번호를 입력하세요" 
+                                id="p"
+                                name="pwd"></label>
+    </div>
+    <div>
+        <input type="checkbox" checked id="c">
+        <label for="c">아이디저장</label>
+        <button type="submit" style="margin-left:40px">로그인</button> 
+    </div>
+</form>
