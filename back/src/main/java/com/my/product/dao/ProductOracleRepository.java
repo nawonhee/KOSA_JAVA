@@ -56,14 +56,46 @@ public class ProductOracleRepository implements ProductRepository {
 		}
 
 	}
+	
+	public int selectCount() throws FindException{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = MyConnection.getConnection();
+		} catch (Exception e) {
+			throw new FindException(e.getMessage());
+		}
+		
+		String selectCountSQL = "SELECT COUNT(*)\r\n"
+				+ "FROM product";
+		try {
+			pstmt = conn.prepareStatement(selectCountSQL);
+			rs = pstmt.executeQuery();
+			rs.next();
+			return rs.getInt(1);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		} finally {
+			MyConnection.close(conn, pstmt, rs);
+		}		
+	}
 	public static void main(String[] args) {
 		ProductOracleRepository repository = new ProductOracleRepository();
-		int startRow = 2;
-		int endRow = 4;
+//		int startRow = 2;
+//		int endRow = 4;
+//		try {
+//			List<Product> list = repository.selectAll(startRow, endRow);
+//			System.out.println(list);
+//		} catch (FindException e) {
+//			e.printStackTrace();
+//		}
 		try {
-			List<Product> list = repository.selectAll(startRow, endRow);
-			System.out.println(list);
+			System.out.println(repository.selectCount());
 		} catch (FindException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

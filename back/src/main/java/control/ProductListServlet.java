@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.my.exception.FindException;
+import com.my.product.dto.PageGroup;
 import com.my.product.dto.Product;
 import com.my.product.service.ProductService;
 
@@ -21,7 +22,7 @@ import com.my.product.service.ProductService;
 public class ProductListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	private ProductService service;
-	private ProductListServlet() {
+	public ProductListServlet() {
 		service = new ProductService();
 	}
 
@@ -35,8 +36,10 @@ public class ProductListServlet extends HttpServlet {
 		
 		String path = "productlistresult.jsp";
 		try {
-			List<Product> list = service.findAll(cp);
-			request.setAttribute("list", list);
+			//List<Product> list = service.findAll(cp);
+			//request.setAttribute("list", list);
+			PageGroup<Product> pb = service.findAll(cp);
+			request.setAttribute("pb", pb);
 		} catch (FindException e) {
 			e.printStackTrace();
 			path = "fail.jsp"; //실패인 경우

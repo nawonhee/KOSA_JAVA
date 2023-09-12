@@ -14,4 +14,10 @@ public interface ProductRepository {
 	 * @throws FindException db와의 연결 실패시 예외발생
 	 */
 	List<Product> selectAll(int startRow, int endRow) throws FindException;
+	/**
+	 * 전체 상품 수를 검색한다
+	 * @return 전체상품수
+	 * @throws FindException DB와의 연결 실패하면 예외 발생한다
+	 */
+	int selectCount() throws FindException;
 }
