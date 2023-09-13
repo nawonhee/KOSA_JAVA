@@ -1,9 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<style>
-*{
-	box-sizing: border-box;
- }
+    
+<style type="text/css">
+	*{
+		box-sizing: border-box;
+	 }
+	 header{
+	 	background-color: #FAECC5; 
+	    padding:20px;
+	    width: 10%;
+	    height:150px;
+	    float:left;
+	 }
+	 header>img{
+        padding : 10px;
+     }
+     nav{
+        background-color: #FAECC5; 
+        text-align: center;
+        width:90%;
+        height:150px;
+        float:left;
+     }
+     nav>ul{
+        list-style-type: none;
+        padding-left:0px;
+        margin-top:70px;
+     }
+     nav>ul>li{
+        display: inline-block;
+        margin-left: 30px;
+     } 
+     nav>ul>li>a{
+        text-decoration: underline;
+     }
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>

@@ -43,5 +43,9 @@ public class ProductService {
 		PageGroup<Product> pg = new PageGroup<>(list, currentPage, totalCnt); 
 		return pg;
 	}
+	
+	public Product findByProdNo(String prodNo) throws FindException{
+		return repository.selectByProdNo(prodNo);
+	}
 
 }

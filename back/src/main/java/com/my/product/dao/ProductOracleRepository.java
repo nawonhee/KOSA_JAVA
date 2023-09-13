@@ -57,6 +57,7 @@ public class ProductOracleRepository implements ProductRepository {
 
 	}
 	
+	@Override
 	public int selectCount() throws FindException{
 		Connection conn = null;
 		PreparedStatement pstmt = null;
@@ -82,6 +83,43 @@ public class ProductOracleRepository implements ProductRepository {
 			MyConnection.close(conn, pstmt, rs);
 		}		
 	}
+	
+	@Override
+	public Product selectByProdNo(String prodNo) throws FindException{
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		try {
+			conn = MyConnection.getConnection();
+		} catch (Exception e) {
+			//e.printStackTrace();
+			throw new FindException(e.getMessage());
+		}
+		
+		String selectByProdNoSQL = "SELECT *\r\n"
+				+ "		 FROM product\r\n"
+				+ "		 WHERE prod_no=?";
+		
+		try {
+			pstmt = conn.prepareStatement(selectByProdNoSQL);
+			pstmt.setString(1, prodNo);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				return new Product(rs.getString("prod_no"),
+									rs.getString("prod_name"),
+									rs.getInt("prod_price"));
+			}else {
+				throw new FindException("상품이 없습니다");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+			throw new FindException(e.getMessage());
+		}finally {
+			MyConnection.close(conn, pstmt, rs);
+		}
+	}
+	
 	public static void main(String[] args) {
 		ProductOracleRepository repository = new ProductOracleRepository();
 //		int startRow = 2;
@@ -92,10 +130,20 @@ public class ProductOracleRepository implements ProductRepository {
 //		} catch (FindException e) {
 //			e.printStackTrace();
 //		}
+		
+		/*
 		try {
 			System.out.println(repository.selectCount());
 		} catch (FindException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		*/
+		
+		try {
+			Product p = repository.selectByProdNo("C0001");
+			System.out.println(p);
+		} catch (FindException e) {
 			e.printStackTrace();
 		}
 	}

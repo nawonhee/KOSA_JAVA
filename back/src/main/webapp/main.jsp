@@ -5,13 +5,18 @@
 <head>
 <meta charset="UTF-8">
 <title>main.jsp</title>
+<style type="text/css">
+section{
+       height:500px;
+       text-align: center;
+}
+</style>
 </head>
 <body>
 <% //JAVA주석문 %>
 <%--JSP주석문 --%>
 <!--HTML주석문 -->
 <jsp:include page="header.jsp"/>
-</nav>
 <section>
 </section>
 <%@include file="footer.jsp" %>
