@@ -29,14 +29,14 @@ public class ProductJsonServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//응답형식 
 		response.setContentType("application/json;charset=utf-8");
-		response.setHeader("Access-Control-Allow-Origin", "http://127.0.0.1:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
 		
 		//응답출력스트림 얻기
 		PrintWriter out = response.getWriter();
 		ObjectMapper mapper = new ObjectMapper();
 		
 		//요청전달데이터 얻기
-		String prodNo = request.getParameter("prodno");
+		String prodNo = request.getParameter("prodNo");
 		try {
 			Product p = service.findByProdNo(prodNo);
 			String jsonStr = mapper.writeValueAsString(p);

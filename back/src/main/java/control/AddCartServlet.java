@@ -21,7 +21,10 @@ public class AddCartServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String prodNo = request.getParameter("prodno");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Credentials", "true"); //백엔드쪽에서 인증서 허용을 해줘야 함
+		
+		String prodNo = request.getParameter("prodNo");
 		int quantity = Integer.parseInt(request.getParameter("quantity"));
 		System.out.println(prodNo+":"+quantity);
 		

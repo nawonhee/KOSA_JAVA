@@ -30,6 +30,9 @@ public class CartListServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("application/json;charset=utf-8");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Credentials", "true");
+		
 		PrintWriter out = response.getWriter();
 		
 		HttpSession session = request.getSession();
@@ -52,10 +55,6 @@ public class CartListServlet extends HttpServlet {
 			try {
 				Product p = service.findByProdNo(key);
 				Map carts = new HashMap<>();
-//				Map product = new HashMap<>();
-//				product.put("prodNo", p.getProdNo());
-//				product.put("prodName", p.getProdName());
-//				product.put("prodPrice", p.getProdPrice());
 				carts.put("product", p);
 				carts.put("quantity", map.get(key));
 				str.add(carts);
