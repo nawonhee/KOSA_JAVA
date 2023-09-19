@@ -47,7 +47,6 @@ public class LoginController extends HttpServlet {
 			map.put("status", 1);
 			map.put("msg", "로그인 성공");
 			session.setAttribute("loginedId", id);
-			System.out.println(session.getAttribute("loginedId"));
 		} catch (FindException e) {
 			e.printStackTrace();
 			map.put("status", 0);

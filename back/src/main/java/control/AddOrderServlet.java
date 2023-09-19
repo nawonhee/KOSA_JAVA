@@ -42,7 +42,6 @@ public class AddOrderServlet extends HttpServlet {
 		
 		HttpSession session = request.getSession();
 		String loginedId = (String)session.getAttribute("loginedId");
-		System.out.println(session.getAttribute("loginedId"));
 		String jsonStr;
 		
 		Map<String, Object> map = new HashMap<>();

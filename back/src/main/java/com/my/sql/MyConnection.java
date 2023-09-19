@@ -1,10 +1,16 @@
 package com.my.sql;
 
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 public class MyConnection {
 	/**
@@ -13,14 +19,22 @@ public class MyConnection {
 	 * @throws Exception 드라이버 클래스 찾지 못하거나 DB연결 실패 시 예외 발생한다
 	 */
 	public static Connection getConnection() throws Exception{
-		//JDBC드라이버로드
-		Class.forName("oracle.jdbc.OracleDriver");
+//		//JDBC드라이버로드
+//		Class.forName("oracle.jdbc.OracleDriver");
+//		
+//		//DB연결
+//		String url = "jdbc:oracle:thin:@localhost:1521:xe"; //아이피,포트번호,서비스아이디
+//		String user = "hr";
+//		String password = "hr";
+//		return DriverManager.getConnection(url,user,password);
 		
-		//DB연결
-		String url = "jdbc:oracle:thin:@localhost:1521:xe"; //아이피,포트번호,서비스아이디
-		String user = "hr";
-		String password = "hr";
-		return DriverManager.getConnection(url,user,password);
+		String resource = "com/my/sql/mybatis-config.xml";
+		InputStream inputStream = Resources.getResourceAsStream(resource);
+		SqlSessionFactory sqlSessionFactory =
+		  new SqlSessionFactoryBuilder().build(inputStream);
+		
+		SqlSession session = sqlSessionFactory.openSession();
+		return session.getConnection();
 	}
 	/**
 	 * 

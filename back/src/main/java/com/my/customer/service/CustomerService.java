@@ -2,6 +2,7 @@ package com.my.customer.service;
 
 import java.util.List;
 
+import com.my.customer.dao.CustomerOracleMybatisRepository;
 import com.my.customer.dao.CustomerOracleRepository;
 import com.my.customer.dao.CustomerRepository;
 import com.my.customer.dto.Customer;
@@ -10,7 +11,7 @@ import com.my.exception.FindException;
 public class CustomerService {
 	private CustomerRepository repository;
 	public CustomerService() {
-		repository = new CustomerOracleRepository();
+		repository = new CustomerOracleMybatisRepository();//new CustomerOracleRepository();
 	}
 	/**
 	 * 아이디와 비밀번호에 일치하는 고객정보가 존재한다면 반환값이 없고
