@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.my.exception.AddException;
 import com.my.exception.FindException;
+import com.my.order.dao.OrderOracleMybatisRepository;
 import com.my.order.dao.OrderOracleRepository;
 import com.my.order.dao.OrderRepository;
 import com.my.order.dto.OrderInfo;
@@ -12,7 +13,7 @@ import com.my.order.dto.OrderInfo;
 public class OrderService {
 	private OrderRepository repository;
 	public OrderService() {
-		repository = new OrderOracleRepository();
+		repository = new OrderOracleMybatisRepository(); //new OrderOracleRepository();
 	}
 	/**
 	 * 주문을 추가한다

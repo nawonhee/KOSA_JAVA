@@ -13,6 +13,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
 import com.my.customer.dto.Customer;
+import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.sql.MyConnection;
 
@@ -43,6 +44,23 @@ public class CustomerOracleMybatisRepository implements CustomerRepository {
 		}catch(Exception e) {
 			e.printStackTrace();
 			throw new FindException(e.getMessage()); 
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
+	
+	@Override
+	public void insert(Customer c) throws AddException{
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.insert("com.my.customer.CustomerMapper.insert",c);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			throw new AddException(e.getMessage());
 		}finally {
 			if(session!=null) {
 				session.close();

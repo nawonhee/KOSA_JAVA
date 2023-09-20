@@ -6,6 +6,7 @@ import com.my.customer.dao.CustomerOracleMybatisRepository;
 import com.my.customer.dao.CustomerOracleRepository;
 import com.my.customer.dao.CustomerRepository;
 import com.my.customer.dto.Customer;
+import com.my.exception.AddException;
 import com.my.exception.FindException;
 
 public class CustomerService {
@@ -30,5 +31,18 @@ public class CustomerService {
 			throw new FindException("로그인 실패");
 		}
 		
+	}
+	
+	/**
+	 * id에 해당하는 고객이 존재하지 않으면 FindException이 발생한다
+	 * @param id
+	 * @throws FindException
+	 */
+	public void idDupChk(String id) throws FindException{
+		repository.selectById(id);
+	}
+	
+	public void signup(Customer c) throws AddException {
+		repository.insert(c);
 	}
 }
