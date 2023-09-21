@@ -10,6 +10,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 /**
  * Servlet implementation class UploadServlet
  */
@@ -23,11 +25,14 @@ public class UploadServlet extends HttpServlet {
 //		String f1Value=request.getParameter("f1");
 		
 		//post방식의 요청인 경우 요청바디의 형식은 multi-part/form-data인 경우
-		ServletInputStream sis = request.getInputStream();
-		Scanner sc = new Scanner(sis);
-		while(sc.hasNextLine()) {
-			System.out.println(sc.nextLine());
-		}
+//		ServletInputStream sis = request.getInputStream();
+//		Scanner sc = new Scanner(sis);
+//		while(sc.hasNextLine()) {
+//			System.out.println(sc.nextLine());
+//		}
+		
+		String attachesDir = "D:\\KOSA202307\\attaches"; //첨부경로
+		ServletFileUpload fileUpload = new ServletFileUpload();
 	}
 
 }
