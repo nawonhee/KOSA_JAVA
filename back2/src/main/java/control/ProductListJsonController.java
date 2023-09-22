@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.my.exception.FindException;
-import com.my.product.dto.PageGroup;
 import com.my.product.dto.Product;
+import com.my.util.PageGroup;
 
 public class ProductListJsonController extends ProductController {
 
@@ -39,6 +39,7 @@ public class ProductListJsonController extends ProductController {
 		} catch (FindException e) {
 			e.printStackTrace();
 		}
+		//return "productlistresult.jsp";
 		return null;
 	}
 

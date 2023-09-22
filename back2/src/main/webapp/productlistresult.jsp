@@ -1,4 +1,4 @@
-<%@page import="com.my.product.dto.PageGroup"%>
+<%@page import="com.my.util.PageGroup"%>
 <%@page import="com.my.product.dto.Product"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"

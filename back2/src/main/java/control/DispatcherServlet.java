@@ -2,8 +2,10 @@ package control;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.lang.reflect.Method;
 import java.util.Properties;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +37,7 @@ public class DispatcherServlet extends HttpServlet {
     	}
     }
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("request.getServletPath()="+request.getServletPath());
+		/*System.out.println("request.getServletPath()="+request.getServletPath());
 //		if(request.getServletPath().equals("/productjson")) {
 //			ProductJsonController control = new ProductJsonController();
 //			control.execute(request, response);
@@ -53,6 +55,34 @@ public class DispatcherServlet extends HttpServlet {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		*/
+		
+		//참고 
+		//response.setContentType("application/json;charset=utf-8");
+		//response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		
+		System.out.println("request.getServletPath()=" + request.getServletPath());
+		String className = env.getProperty(request.getServletPath());
+		try {
+			Class<?> clazz = Class.forName(className);//클래스이름에 해당하는 .class파일 찾아서 JVM으로 로드
+			
+			Controller controller;
+			try {
+				Method method = clazz.getMethod("getInstance");
+				controller = (Controller)method.invoke(null);//static인 getInstance()메서드호출
+			}catch(NoSuchMethodException e) {			
+				controller = (Controller)clazz.getDeclaredConstructor().newInstance();
+			}
+			String path = controller.execute(request, response);
+			if(path!=null){
+				RequestDispatcher rd = request.getRequestDispatcher(path);
+				rd.forward(request, response);
+			}
+			//controller.execute(request, response);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 }

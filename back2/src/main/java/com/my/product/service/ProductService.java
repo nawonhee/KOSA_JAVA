@@ -6,8 +6,8 @@ import com.my.exception.FindException;
 import com.my.product.dao.ProductOracleMybatisRepository;
 import com.my.product.dao.ProductOracleRepository;
 import com.my.product.dao.ProductRepository;
-import com.my.product.dto.PageGroup;
 import com.my.product.dto.Product;
+import com.my.util.PageGroup;
 
 public class ProductService {
 	private ProductRepository repository;
