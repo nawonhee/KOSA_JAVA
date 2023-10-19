@@ -32,7 +32,7 @@ import lombok.Setter;
 public class ProductOracleMybatisRepository implements ProductRepository {
 	
 	@Autowired
-	@Qualifier(value="sqlSessionFactory84")
+	@Qualifier(value="sqlSessionFactory")
 	private SqlSessionFactory sqlSessionFactory;
 	
 	
