@@ -7,6 +7,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -15,6 +17,7 @@ import com.my.product.dto.Product;
 
 @Controller
 public class TestController {
+	//public ModelAndView m(HttpServlet request, HttpServletResponse response, HttpSession session)
 	@GetMapping("/a")
 	public ModelAndView a(@RequestParam(name="n") String name,  //요청전달데이터명:n ex) /a?n=oh
 						@RequestParam (required=false, defaultValue = "0")int sal) {
@@ -75,5 +78,13 @@ public class TestController {
 		HttpStatus status = HttpStatus.NOT_FOUND; //404응답코드
 		ResponseEntity<String> entity = new ResponseEntity<>(body, status);
 		return entity;
+	}
+	
+	@PostMapping("/p")
+	@ResponseBody
+	//ex) /p?prodNo=C0001&prodPrice=1500 요청전달데이터로 전달되지 않고
+	//ex) /p요청시 JSON문자열 형태로 요청전달데이터가 전달되면 @RequestBody로 데이터를 받아낼 수 있다
+	public void p(@RequestBody Product data) {
+		System.out.println(data);
 	}
 }

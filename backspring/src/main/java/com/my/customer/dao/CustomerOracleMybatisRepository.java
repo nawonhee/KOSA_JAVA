@@ -12,12 +12,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 
 import com.my.customer.dto.Customer;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
-import com.my.sql.MyConnection;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +28,7 @@ import lombok.Setter;
 @Setter @Getter @NoArgsConstructor @AllArgsConstructor
 public class CustomerOracleMybatisRepository implements CustomerRepository {
 	@Autowired
+	@Qualifier(value="sqlSessionFactory")
 	private SqlSessionFactory sqlSessionFactory;
 	
 	@Override
