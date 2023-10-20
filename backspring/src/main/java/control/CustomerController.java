@@ -8,6 +8,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -72,11 +73,14 @@ public class CustomerController {
 			service.signup(c);
 		
 			try {
-				File targetFile = new File("C:\\KOSA202307\\attaches", f1.getOriginalFilename());
+				String extension = StringUtils.getFilenameExtension(f1.getOriginalFilename());
+				System.out.println(extension);
+				File targetFile = new File("C:\\KOSA202307\\attaches", id+"_profile."+extension);
 				FileCopyUtils.copy(f1.getBytes(), targetFile);
-			
-				File targetFile2 = new File("C:\\KOSA202307\\attaches", f2.getOriginalFilename()); 
-				FileCopyUtils.copy(f2.getBytes(), targetFile);
+				
+				String extension2 = StringUtils.getFilenameExtension(f2.getOriginalFilename());
+				File targetFile2 = new File("C:\\KOSA202307\\attaches", id+"_intro."+extension2); 
+				FileCopyUtils.copy(f2.getBytes(), targetFile2);
 			} catch(Exception e) {
 				
 			}
