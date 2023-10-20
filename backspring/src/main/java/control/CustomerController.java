@@ -64,11 +64,7 @@ public class CustomerController {
 	}
 	
 	@PostMapping("/signup")
-	public Map<String, Object> signup(@RequestParam(name="id") String id, 
-									  @RequestParam(name="pwd") String pwd, 
-									  @RequestParam(name="name") String name,
-									  MultipartFile f1,
-									  MultipartFile f2){
+	public Map<String, Object> signup(String id, String pwd, String name,MultipartFile f1,MultipartFile f2){
 		Map<String, Object> map = new HashMap<>();
 		
 		try {
