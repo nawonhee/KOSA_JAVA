@@ -62,7 +62,7 @@ public class CustomerOracleMybatisRepository implements CustomerRepository {
 			session.insert("com.my.customer.CustomerMapper.insert",c);
 			//session.commit();
 		}catch(Exception e) {
-			session.rollback();
+			//session.rollback();
 			throw new AddException(e.getMessage());
 		}finally {
 			if(session!=null) {

@@ -6,7 +6,7 @@
 <resultMap type="OrderInfo" id="OrderInfoMap" autoMapping="true">
 	<id property="orderNo" column="order_no"/>
 	<collection property="lines" ofType="OrderLine" autoMapping="true">
-		<association property="orderLineNo" column="order_no"/>
+		<!-- <association property="orderLineNo" column="order_no"/> -->
 		<association property="orderP" javaType="Product" autoMapping="true"></association>
 	</collection>
 </resultMap>

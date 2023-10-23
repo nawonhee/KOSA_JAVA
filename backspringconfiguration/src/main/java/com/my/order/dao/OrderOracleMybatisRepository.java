@@ -37,15 +37,16 @@ public class OrderOracleMybatisRepository implements OrderRepository {
 	private SqlSessionFactory sqlSessionFactory;
 	
 	@Override
+	@Transactional(rollbackFor = AddException.class)
 	public void insert(OrderInfo info) throws AddException {
 		SqlSession session = null;
 		session = sqlSessionFactory.openSession();
 		try {
 			insertInfo(session, info.getOrderId());
 			insertLine(session, info.getLines());
-			session.commit();
+			//session.commit();
 		}catch(Exception e){
-			session.rollback();
+			//session.rollback();
 			throw new AddException(e.getMessage());
 		}finally {
 			if(session!=null) {

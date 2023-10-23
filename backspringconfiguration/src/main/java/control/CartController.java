@@ -64,11 +64,10 @@ public class CartController {
 				carts.put("product", p);
 				carts.put("quantity", map.get(key));
 				str.add(carts);
-				return str;
 			} catch (FindException e) {
 				e.printStackTrace();
 			}
 		}
-		return null;
+		return str;
 	}
 }
