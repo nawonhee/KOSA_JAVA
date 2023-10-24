@@ -10,6 +10,9 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -30,17 +33,20 @@ public class CustomerController {
 	private CustomerService service;
 	
 	@GetMapping("/iddupchk")
-	public Map<String, Object> iddupchk(String id){
-		Map<String, Object> map = new HashMap<>();
+	public ResponseEntity<?> iddupchk(String id){
+//		Map<String, Object> map = new HashMap<>();
 
 		try{
 			service.idDupChk(id);
-			map.put("status", 0);
-			return map;
+//			map.put("status", 0);
+			HttpHeaders headers = new HttpHeaders();
+			headers.add("Content-Type","test/html;charset=UTF-8" );
+			return new ResponseEntity<>("이미 사용중인 아이디입니다",headers, HttpStatus.BAD_REQUEST);
 		}catch(FindException e) {
-			map.put("status", 1);
-			return map;
+//			map.put("status", 1);
+			return new ResponseEntity<>(HttpStatus.OK);
 		}
+//			return map;
 	}
 	
 	@PostMapping("/login")

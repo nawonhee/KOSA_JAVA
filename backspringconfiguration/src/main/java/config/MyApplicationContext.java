@@ -29,16 +29,6 @@ import com.zaxxer.hikari.HikariDataSource;
 public class MyApplicationContext {
 	
 	@Bean
-	public SimpleDriverDataSource dataSource() {
-		SimpleDriverDataSource sdds = new SimpleDriverDataSource();
-		sdds.setDriverClass(oracle.jdbc.OracleDriver.class);
-		sdds.setUrl("jdbc:oracle:thin:@localhost:1521:xe");
-		sdds.setUsername("hr");
-		sdds.setPassword("hr");
-		return sdds;
-	}
-	
-	@Bean
 	public HikariConfig hikariConfig() {
 		HikariConfig config = new HikariConfig();
 		config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
