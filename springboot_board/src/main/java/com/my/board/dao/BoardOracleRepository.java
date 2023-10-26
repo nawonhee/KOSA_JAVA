@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.my.board.dto.Board;
+import com.my.board.dto.Reply;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.exception.ModifyException;
@@ -111,6 +112,57 @@ public class BoardOracleRepository {
 		try {
 			session = sqlSessionFactory.openSession();
 			session.delete("com.my.board.BoardMapper.deleteBoard", boardNo);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+			throw new RemoveException(e.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
+	
+	public void insertReply(Reply reply) throws AddException{
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.insert("com.my.board.BoardMapper.insertReply", reply);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+			throw new AddException(e.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
+	
+	public void updateReply(Reply reply) throws ModifyException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.update("com.my.board.BoardMapper.updateReply", reply);
+			session.commit();
+		}catch(Exception e) {
+			session.rollback();
+			e.printStackTrace();
+			throw new ModifyException(e.getMessage());
+		}finally {
+			if(session!=null) {
+				session.close();
+			}
+		}
+	}
+	
+	public void deleteReply(int replyNo) throws RemoveException {
+		SqlSession session = null;
+		try {
+			session = sqlSessionFactory.openSession();
+			session.delete("com.my.board.BoardMapper.deleteReply", replyNo);
 			session.commit();
 		}catch(Exception e) {
 			session.rollback();

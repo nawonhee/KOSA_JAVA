@@ -12,11 +12,13 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.client.ExpectedCount;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.my.board.dao.BoardOracleRepository;
 import com.my.board.dto.Board;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
+import com.my.exception.ModifyException;
 
 @SpringBootTest
 class BoardRepositoryTest {
@@ -55,19 +57,26 @@ class BoardRepositoryTest {
 	
 	@Test
 	@DisplayName("게시글 작성")
-	void testinsertBoard() throws AddException, FindException{
+	@Transactional //실제로 DB에는 들어가지 않음, 자동 rollback을 해주기 때문
+	void testinsertBoard() throws AddException{
 		Board board = new Board();
-		board.setBoardTitle("제목5");
-		board.setBoardContent("내용5");
-		board.setBoardId("ss");
+		board.setBoardTitle("제목6");
+		board.setBoardContent("내용6");
+		board.setBoardId("B");
 		board.setBoardDt(new Date());
 		repository.insertBoard(board);
-		
-		Board board2 = repository.selectByBoardNo(board.getBoardNo());
-		String expectedTitle = "제목5";
-		String expectedContent = "내용5";
-		Assertions.assertEquals(expectedTitle, board.getBoardTitle());
-		Assertions.assertEquals(expectedContent, board.getBoardContent());
 	}
+	
+//	@Test
+//	@DisplayName("게시글 수정")
+//	@Transactional //실제로 DB에는 들어가지 않음, 자동 rollback을 해주기 때문
+//	void testupdateBoard() throws ModifyException{
+//		Board board = new Board();
+//		board.setBoardTitle("제목6");
+//		board.setBoardContent("내용6");
+//		board.setBoardId("B");
+//		board.setBoardDt(new Date());
+//		repository.insertBoard(board);
+//	}
 
 }

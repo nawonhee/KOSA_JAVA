@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.my.board.dao.BoardOracleRepository;
 import com.my.board.dto.Board;
+import com.my.board.dto.Reply;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.exception.ModifyException;
@@ -30,5 +31,14 @@ public class BoardService {
 	}
 	public void remove(int boardNo) throws RemoveException{
 		repository.deleteBoard(boardNo);
+	}
+	public void writeReply(Reply reply) throws AddException{
+		repository.insertReply(reply);
+	}
+	public void updateReply(Reply reply) throws ModifyException{
+		repository.updateReply(reply);
+	}
+	public void deleteReply(int replyNo) throws RemoveException{
+		repository.deleteReply(replyNo);
 	}
 }
