@@ -1,1 +1,2 @@
-2023-10-26 17:01:59.635  INFO 10700 --- [HikariPool-4 connection adder] jdbc.audit                               : 15. Connection.getAutoCommit() returned true
+2023-10-27 17:43:49.602  INFO 16876 --- [HikariPool-25 connection adder] jdbc.audit                               : 103. Connection.isReadOnly() returned false
+2023-10-27 17:43:49.605  INFO 16876 --- [HikariPool-25 connection adder] jdbc.audit                               : 103. Connection.getAutoCommit() returned true

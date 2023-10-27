@@ -24,6 +24,7 @@ import com.my.exception.ModifyException;
 class BoardRepositoryTest {
 	@Autowired
 	BoardOracleRepository repository;
+	
 	@Test
 	@DisplayName("게시글 전체 검색 리스트")
 	void testSelectAll() throws FindException {
