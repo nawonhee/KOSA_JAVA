@@ -1,6 +1,6 @@
-2023-10-27 17:44:30.130  INFO 16876 --- [HikariPool-25 connection closer] jdbc.connection                          : 102. Connection closed
-2023-10-27 17:44:30.136  INFO 16876 --- [HikariPool-25 connection closer] jdbc.audit                               : 102. Connection.close() returned 
-2023-10-27 17:44:30.172  INFO 16876 --- [HikariPool-25 connection adder] jdbc.connection                          : 105. Connection opened
-2023-10-27 17:44:30.173  INFO 16876 --- [HikariPool-25 connection adder] jdbc.audit                               : 105. Connection.new Connection returned 
-2023-10-27 17:44:30.173  INFO 16876 --- [HikariPool-25 connection adder] jdbc.audit                               : 105. Connection.isReadOnly() returned false
-2023-10-27 17:44:30.175  INFO 16876 --- [HikariPool-25 connection adder] jdbc.audit                               : 105. Connection.getAutoCommit() returned true
+2023-10-30 10:27:43.928  INFO 16876 --- [HikariPool-25 connection closer] jdbc.audit                               : 124. Connection.close() returned 
+2023-10-30 10:27:43.930  INFO 16876 --- [HikariPool-25 connection closer] jdbc.connection                          : 125. Connection closed
+2023-10-30 10:27:43.930  INFO 16876 --- [HikariPool-25 connection closer] jdbc.audit                               : 125. Connection.close() returned 
+2023-10-30 10:27:43.931  INFO 16876 --- [HikariPool-25 connection closer] jdbc.connection                          : 126. Connection closed
+2023-10-30 10:27:43.931  INFO 16876 --- [HikariPool-25 connection closer] jdbc.audit                               : 126. Connection.close() returned 
+2023-10-30 10:27:43.931  INFO 16876 --- [RMI TCP Connection(720)-127.0.0.1] com.zaxxer.hikari.HikariDataSource       : HikariPool-25 - Shutdown completed.

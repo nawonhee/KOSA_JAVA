@@ -47,10 +47,10 @@ public class MyApplicationContext {
 		return new HikariDataSource(hikariConfig());
 	}
 	
-	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		DataSourceTransactionManager tx = new DataSourceTransactionManager();
-		tx.setDataSource(dataSourceHikari());
-		return tx;
-	}
+//	@Bean
+//	public DataSourceTransactionManager transactionManager() {
+//		DataSourceTransactionManager tx = new DataSourceTransactionManager();
+//		tx.setDataSource(dataSourceHikari());
+//		return tx;
+//	}
 }
