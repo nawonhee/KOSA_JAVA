@@ -3,13 +3,18 @@ package com.my.jpa.dao;
 import java.math.BigDecimal;
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import com.my.jpa.entity.A;
 
-public interface ARepository extends CrudRepository<A, String> { //entity타입과 key타입
+//CrudRepository는 단순 crud이고 JpaRepository가 page를 포함하고 있음
+public interface ARepository extends JpaRepository<A, String>, ASearch{ //entity타입과 key타입
 	//쿼리메서드작성 가능 : findBy멤버변수명, 반환형은 List자료형
 	List<A> findByA4(String a4);
 	

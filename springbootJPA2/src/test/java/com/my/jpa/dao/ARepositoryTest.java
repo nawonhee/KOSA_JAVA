@@ -13,7 +13,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import com.my.jpa.dto.ADTO;
 import com.my.jpa.entity.A;
 
 import lombok.extern.slf4j.Slf4j;
@@ -136,4 +141,69 @@ class ARepositoryTest {
 		r.modify(a_1, a_2);
 	}
 	
+	@Test
+	@Transactional
+	@Commit
+	void test11QdslSearch() {
+		List<A> list = r.search1();
+		log.error("search1()={}", list );
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	void test12QdslSearch2() {
+		List<A> list = r.search2(3);
+		log.error("search2()={}", list );
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	void test13QdslSearch3() {
+		List<A> list = r.search3("4f");
+		log.error("search3()={}", list );
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	void test14QdslSearch4() {
+		List<A> list = r.search4(new String[] {"a_1","a4"}, "4f");
+		log.error("search4()={}", list );
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	void test15QdslSearch5() {
+		List<A> list = r.search5(3, "4f");
+		log.error("search4()={}", list );
+	}
+	
+	@Test
+	@Transactional
+	@Commit
+	void test16Add() {
+		ADTO dto = new ADTO();
+		dto.setA1("six");
+		dto.setA2(6);
+		dto.setA4("a46");
+		r.add(dto);
+	}
+	
+	@DisplayName("Page처리용 findAll메서드")
+	@Test
+	void testPageable() {
+		int currentPage = 2;
+		int pageIndex = currentPage-1;//zero-based page index.
+		int size = 4;//the size of the page to be returned.
+		Sort sort = Sort.by("a4").ascending();//must not be null, use Sort.unsorted() instead. 
+		Pageable pageable = PageRequest.of(pageIndex,  size, sort);
+		Page<A> page = r.findAll(pageable);
+		log.error("page.getSize()={}",page.getSize());
+		log.error("page.getTotalPages()={}",page.getTotalPages());
+		log.error("page.getContent().size()={}", page.getContent().size());
+		log.error("page.getContent()={}", page.getContent());
+	}
 }
