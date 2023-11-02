@@ -24,6 +24,6 @@ public class PD {
 	//자식쪽 : @ManyToOne역할
 	@OneToOne
 	@JoinColumn(name="pd_no") //FK
-	@MapsId("pNo")
+//	@MapsId("pNo") //있어도 무시되지만 안 쓰는 것이 맞음
 	private P p; //부모쪽에서의 FK
 }

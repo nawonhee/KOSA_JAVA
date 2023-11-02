@@ -56,7 +56,7 @@ public class A {
 	
 	@Column(nullable=false, precision = 5, scale = 2)
 	@ColumnDefault(value = "1")
-	//private Integer a_2; //number자료형이 아니라 varchar2가 되어버림, 자릿수 보장 못함 number(10,0)
+	//private Integer a_2; //자릿수 보장 못함 number(10,0)
 	private BigDecimal a_2;
 	
 //	@Column
