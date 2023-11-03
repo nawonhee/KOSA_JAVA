@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.my.board.dto.Board;
 import com.my.board.dto.Reply;
 import com.my.board.service.BoardService;
+import com.my.board.service.ReplyService;
 import com.my.exception.AddException;
 import com.my.exception.FindException;
 import com.my.exception.ModifyException;
@@ -33,6 +34,8 @@ public class BoardController {
 	private Logger log = LoggerFactory.getLogger(this.getClass());
 	@Autowired
 	private BoardService service;
+	@Autowired
+	private ReplyService rs;
 	
 	@GetMapping("/list")
 	public List<Board> list() throws FindException{
@@ -40,7 +43,7 @@ public class BoardController {
 	}
 
 	@GetMapping("/{boardNo}")
-	public Board info(@PathVariable int boardNo) throws FindException{
+	public Board info(@PathVariable Long boardNo) throws FindException{
 		return service.findByBoardNo(boardNo);
 	}
 	
@@ -58,7 +61,7 @@ public class BoardController {
 	
 	//PUT /board/1
 	@PutMapping(value="/{boardNo}", produces="application/json;charset=UTF-8")
-	public ResponseEntity<?> modify(@PathVariable int boardNo, @RequestBody Board board) throws ModifyException{
+	public ResponseEntity<?> modify(@PathVariable Long boardNo, @RequestBody Board board) throws ModifyException{
 		board.setBoardNo(boardNo);
 		service.modify(board);
 		HttpHeaders headers = new HttpHeaders();
@@ -71,7 +74,7 @@ public class BoardController {
 	
 	//DELETE /board/1
 	@DeleteMapping(value="/{boardNo}", produces = "application/json;charset=UTF-8")
-	public ResponseEntity<?> remove(@PathVariable int boardNo) throws RemoveException {
+	public ResponseEntity<?> remove(@PathVariable Long boardNo) throws RemoveException {
 		service.remove(boardNo);
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
@@ -84,16 +87,16 @@ public class BoardController {
 	//POST  /board/reply/1,  
 	//POST  /board/reply/1/9
 	@PostMapping(value= {"reply/{boardNo}/{parentNo}", "reply/{boardNo}"})
-	public ResponseEntity<?> writeReply(@PathVariable int boardNo, 
-										@PathVariable(name="parentNo") Optional<Integer> optParentNo,
+	public ResponseEntity<?> writeReply(@PathVariable Long boardNo, 
+										@PathVariable(name="parentNo") Optional<Long> optParentNo,
 										@RequestBody Reply reply) throws AddException{
 		reply.setReplyBoardNo(boardNo);
 		if(!optParentNo.isPresent()) { //parentNo가 없는 경우 --일반 답글쓰기
-			service.writeReply(reply);
+			rs.writeReply(reply);
 		}else { //parentNo가 있는 경우 -- 답글의 답글
-			Integer parentNo = optParentNo.get();
+			Long parentNo = optParentNo.get();
 			reply.setReplyParentNo(parentNo);
-			service.writeReply(reply);
+			rs.writeReply(reply);
 		}
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");
@@ -104,7 +107,7 @@ public class BoardController {
 	
 	//PUT     /board/reply/15
 	@PutMapping(value="reply/{replyNo}")
-	public ResponseEntity<?> modifyReply(@PathVariable int replyNo,
+	public ResponseEntity<?> modifyReply(@PathVariable Long replyNo,
 										@RequestBody Reply reply) throws ModifyException{
 		System.out.println(replyNo);
 		log.debug("DEBUG 메시지");
@@ -118,14 +121,14 @@ public class BoardController {
 		headers.add("Access-Control-Allow-Credentials", "true");
 		
 		reply.setReplyNo(replyNo);
-		service.updateReply(reply);
+		rs.updateReply(reply);
 		return new ResponseEntity<> ("댓글이 수정되었습니다", headers, HttpStatus.OK);
 	}
 	
 	//DELETE  /board/reply/9
 	@DeleteMapping(value="reply/{replyNo}")
-	public ResponseEntity<?> removeReply(@PathVariable int replyNo) throws RemoveException{
-		service.deleteReply(replyNo);
+	public ResponseEntity<?> removeReply(@PathVariable Long replyNo) throws RemoveException{
+		rs.deleteReply(replyNo);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.add("Content-Type", "text/html; charset=UTF-8");

@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication //dispatcher와 똑같은 역할
-public class SpringbootBoardApplication {
+public class SpringbootBoardJPAApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(SpringbootBoardApplication.class, args);
+		SpringApplication.run(SpringbootBoardJPAApplication.class, args);
 	}
 
 }

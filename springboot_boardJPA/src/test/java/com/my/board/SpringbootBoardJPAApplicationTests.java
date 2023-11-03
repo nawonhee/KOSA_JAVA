@@ -14,7 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @SpringBootTest
 @Slf4j
-class SpringbootBoardApplicationTests {
+class SpringbootBoardJPAApplicationTests {
 	//Logger log = LoggerFactory.getLogger(getClass());
 	@Autowired
 	Environment env;

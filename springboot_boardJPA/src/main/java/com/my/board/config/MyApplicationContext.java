@@ -34,19 +34,7 @@ public class MyApplicationContext {
 	
 	@Autowired
 	Environment env;
-//	@Bean
-//	public HikariConfig hikariConfig() {
-//		HikariConfig config = new HikariConfig();
-//		//config.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-//		config.setDriverClassName(hikariDriverClassName);
-//		config.setJdbcUrl("jdbc:log4jdbc:oracle:thin:@localhost:1521:xe");
-//		//config.setUsername("hr");
-//		config.setUsername(env.getProperty("spring.datasource.hikari.username")); //프로퍼티 파일 활용
-//		config.setPassword("hr");
-//		config.setMinimumIdle(3);
-//		return config;
-//	}
-	
+
 	@Bean
 	@ConfigurationProperties("spring.datasource.hikari")
 	public HikariConfig hikariConfig() {
@@ -61,19 +49,4 @@ public class MyApplicationContext {
 		return new HikariDataSource(hikariConfig());
 	}
 	
-	@Bean
-	public SqlSessionFactory sqlSessionFactory() throws Exception {
-		SqlSessionFactoryBean ssfb = new SqlSessionFactoryBean();
-		ssfb.setDataSource(dataSourceHikari());
-		Resource resource = new ClassPathResource("mybatis-config.xml");
-		ssfb.setConfigLocation(resource);
-		return (SqlSessionFactory)ssfb.getObject();
-	}
-	
-	@Bean
-	public DataSourceTransactionManager transactionManager() {
-		DataSourceTransactionManager tx = new DataSourceTransactionManager();
-		tx.setDataSource(dataSourceHikari());
-		return tx;
-	}
 }
