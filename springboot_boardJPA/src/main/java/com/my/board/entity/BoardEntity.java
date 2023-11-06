@@ -2,6 +2,7 @@ package com.my.board.entity;
 
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -26,9 +27,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-@NoArgsConstructor @AllArgsConstructor
-
-@Getter @Builder
+@NoArgsConstructor @AllArgsConstructor@Getter 
+@Builder
 
 @DynamicInsert
 @Entity
@@ -53,15 +53,16 @@ public class BoardEntity {
 	@Column(name="board_content")
 	private String boardContent;
 	
-	@OneToMany (
-			fetch = FetchType.EAGER,
-			cascade = CascadeType.REMOVE)
+	@OneToMany (fetch = FetchType.LAZY //replies를 사용하지 않는다면 같이 검색되지 않음 -> 퍼포먼스 향상, 같이 즉시 로딩하려면 EAGER 사용! 여기서는 상관없음
+				, cascade = CascadeType.REMOVE)
 	@JoinColumn(name="reply_board_no")
-	private List<ReplyEntity> replies; //답글목록
+	@Builder.Default
+	private List<ReplyEntity> replies = new ArrayList<>(); //답글목록
 	
 //	@Column(name="board_reply_cnt")
 	@Transient
-	private Integer replyCnt; //답글수
+	@Builder.Default
+	private Integer replyCnt=0; //답글수
 
 	/**
 	 * 내용을 변경한다

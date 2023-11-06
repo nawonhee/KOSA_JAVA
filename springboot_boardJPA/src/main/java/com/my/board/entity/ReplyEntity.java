@@ -4,8 +4,10 @@ import java.math.BigDecimal;
 import java.sql.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -52,9 +54,9 @@ public class ReplyEntity {
 	@Column(name="reply_content")
 	private String replyContent;
 	
-	@OneToMany
+	@OneToMany(fetch = FetchType.LAZY, cascade =CascadeType.REMOVE)
 	@JoinColumn(name="reply_parent_no")
-	private List<ReplyEntity> reply;
+	private List<ReplyEntity> reply; //답글의 답글들
 
 	@Column(name="reply_board_no") //FK
 	private Long replyBoardNo;
