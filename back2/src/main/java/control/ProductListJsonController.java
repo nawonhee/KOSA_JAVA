@@ -18,9 +18,14 @@ public class ProductListJsonController extends ProductController {
 
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response) throws IOException {
+		try {
+			Thread.sleep(3000);
+		}catch(InterruptedException e) {
+			e.printStackTrace();
+		}
 		// 응답형식
 		response.setContentType("application/json;charset=utf-8");
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
 		// 응답 출력 스트림 얻기
 		PrintWriter out = response.getWriter();
 
