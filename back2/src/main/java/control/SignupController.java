@@ -18,7 +18,7 @@ public class SignupController extends CustomerController {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5174");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		response.setContentType("application/json;charset=utf-8");
 		
@@ -27,22 +27,26 @@ public class SignupController extends CustomerController {
 		Map<String, Object> map = new HashMap<>();
 		
 		try {
-			Attach attach=new Attach(request);
-			String id=attach.getParameter("id");
-			String pwd=attach.getParameter("pwd");
-			String name=attach.getParameter("name");
+//			Attach attach=new Attach(request);
+//			String id=attach.getParameter("id");
+//			String pwd=attach.getParameter("pwd");
+//			String name=attach.getParameter("name");
+			String id=request.getParameter("id");
+			String pwd=request.getParameter("pwd");
+			String name=request.getParameter("name");
+			System.out.println(id+" "+pwd+" "+name);
 			Customer c= new Customer(id, pwd, name);
 			service.signup(c);
 		
-			try {
-					String originProfileFileName=attach.getFile("f1").get(0).getName();
-					attach.upload("f1", id+"_profile_"+originProfileFileName);
-			
-					String originIntroFileName=attach.getFile("f2").get(0).getName();
-					attach.upload("f2", id+"_intro_"+originIntroFileName);
-			} catch(Exception e) {
-				
-			}
+//			try {
+//					String originProfileFileName=attach.getFile("f1").get(0).getName();
+//					attach.upload("f1", id+"_profile_"+originProfileFileName);
+//			
+//					String originIntroFileName=attach.getFile("f2").get(0).getName();
+//					attach.upload("f2", id+"_intro_"+originIntroFileName);
+//			} catch(Exception e) {
+//				
+//			}
 		
 			map.put("status", 1);
 			map.put("msg", "가입성공");

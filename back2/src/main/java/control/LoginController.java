@@ -18,7 +18,7 @@ public class LoginController extends CustomerController {
 	@Override
 	public String execute(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5174");
 		response.setHeader("Access-Control-Allow-Credentials", "true");
 		
 		//response.setContentType("text/html;charset=utf-8");
@@ -29,6 +29,8 @@ public class LoginController extends CustomerController {
 		String pwd = request.getParameter("pwd");
 		ObjectMapper mapper = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
+		
+		System.out.println(id+pwd);
 
 		HttpSession session = request.getSession();
 		session.removeAttribute("loginedId");

@@ -37,6 +37,7 @@ public class DispatcherServlet extends HttpServlet {
     	}
     }
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.setHeader("Access-Control-Allow-Headers", "*");
 		/*System.out.println("request.getServletPath()="+request.getServletPath());
 //		if(request.getServletPath().equals("/productjson")) {
 //			ProductJsonController control = new ProductJsonController();

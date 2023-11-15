@@ -20,7 +20,7 @@ public class ProductJsonController extends ProductController {
 			throws ServletException, IOException {
 		// 응답형식
 		response.setContentType("application/json;charset=utf-8");
-		response.setHeader("Access-Control-Allow-Origin", "http://192.168.1.12:5500");
+		response.setHeader("Access-Control-Allow-Origin", "http://localhost:5500");
 
 		// 응답출력스트림 얻기
 		PrintWriter out = response.getWriter();
